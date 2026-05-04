@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: data-service
+
+  server:
+    port: 8081
+
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
+    consumer:
+      group-id: appointment-group
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.use.type.headers: false
+        spring.json.value.default.type: ru.tolkacheva.data_service.dto.AppointmentDto
+        spring.json.trusted.packages: "*"
+
+  jpa:
+    hibernate:
+      ddl-auto: update
