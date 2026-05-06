@@ -3,7 +3,10 @@ package ru.tolkacheva.data_service.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import ru.tolkacheva.data_service.entities.Appointment;
+import ru.tolkacheva.data_service.entities.Doctor;
+import ru.tolkacheva.data_service.entities.Patient;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,9 +21,9 @@ public interface AppointmentRepository extends JpaRepository<Appointment, UUID> 
 
     // Количество записей по дням
     @Query("""
-        SELECT DATE(a.appointmentDate), COUNT(a)
+        SELECT DATE(a.date), COUNT(a)
         FROM Appointment a
-        GROUP BY DATE(a.appointmentDate)
+        GROUP BY DATE(a.date)
     """)
     List<Object[]> countByDay();
 
@@ -31,4 +34,10 @@ public interface AppointmentRepository extends JpaRepository<Appointment, UUID> 
         ORDER BY COUNT(a) DESC
     """)
     List<Object[]> topPatients();
+
+    boolean existsByPatientAndDoctorAndDate(
+            Patient patient,
+            Doctor doctor,
+            LocalDateTime date
+    );
 }

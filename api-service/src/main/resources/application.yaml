@@ -2,6 +2,9 @@ spring:
   application:
     name: api-service
 
+  server:
+    port: 8080
+
   kafka:
     bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
     producer:
@@ -9,5 +12,6 @@ spring:
       properties:
         spring.json.add.type.headers: false
 
-  data-service:
-    url: ${DATA_SERVICE_URL}
+data:
+  service:
+    url: ${DATA_SERVICE_URL:http://localhost:8081}

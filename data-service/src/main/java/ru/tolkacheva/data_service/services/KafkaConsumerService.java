@@ -15,6 +15,10 @@ public class KafkaConsumerService {
             groupId = "data-service-group"
     )
     public void consume(AppointmentDto dto) {
-        service.save(dto);
+        try {
+            service.save(dto);
+        } catch (Exception e) {
+            System.err.println("Kafka error: " + e.getMessage());
+        }
     }
 }

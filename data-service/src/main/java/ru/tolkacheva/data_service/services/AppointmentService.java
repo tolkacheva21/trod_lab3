@@ -35,11 +35,16 @@ public class AppointmentService {
                 ));
 
         Appointment appointment = new Appointment(
-                UUID.randomUUID(),
+                null,
                 patient,
                 doctor,
                 dto.getDate()
         );
+
+        if (appointmentRepo.existsByPatientAndDoctorAndDate(
+                patient, doctor, dto.getDate())) {
+            return;
+        }
 
         appointmentRepo.save(appointment);
     }

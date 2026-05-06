@@ -27,5 +27,5 @@ public class Appointment {
     private Doctor doctor;
 
     @Column(name = "appointment_date")
-    private LocalDateTime appointmentDate;
+    private LocalDateTime date;
 }
