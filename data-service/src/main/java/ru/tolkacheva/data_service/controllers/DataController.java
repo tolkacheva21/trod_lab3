@@ -3,7 +3,7 @@ package ru.tolkacheva.data_service.controllers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.tolkacheva.data_service.entities.Appointment;
+import ru.tolkacheva.data_service.dto.AppointmentDto;
 import ru.tolkacheva.data_service.repositories.AppointmentRepository;
 
 import java.util.List;
@@ -14,8 +14,15 @@ public class DataController {
     private final AppointmentRepository appointmentRepo;
 
     @GetMapping("/appointments/search")
-    public List<Appointment> search() {
-        return appointmentRepo.findAll();
+    public List<AppointmentDto> search() {
+        return appointmentRepo.findAll().stream()
+                .map(a -> new AppointmentDto(
+                        a.getPatient().getName(),
+                        a.getDoctor().getName(),
+                        a.getDoctor().getSpecialization(),
+                        a.getDate()
+                ))
+                .toList();
     }
 
     @GetMapping("/reports/count-day")

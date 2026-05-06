@@ -11,8 +11,8 @@ public class KafkaConsumerService {
     private final AppointmentService service;
 
     @KafkaListener(
-            topics = "appointments-topic",
-            groupId = "data-service-group"
+            topics = "${kafka.topic}",
+            groupId = "${spring.kafka.consumer.group-id}"
     )
     public void consume(AppointmentDto dto) {
         try {

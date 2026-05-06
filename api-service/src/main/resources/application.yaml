@@ -15,3 +15,6 @@ spring:
 data:
   service:
     url: ${DATA_SERVICE_URL:http://localhost:8081}
+
+kafka:
+  topic: appointments-topic

@@ -21,9 +21,9 @@ public interface AppointmentRepository extends JpaRepository<Appointment, UUID> 
 
     // Количество записей по дням
     @Query("""
-        SELECT DATE(a.date), COUNT(a)
+        SELECT a.date, COUNT(a)
         FROM Appointment a
-        GROUP BY DATE(a.date)
+        GROUP BY a.date
     """)
     List<Object[]> countByDay();
 

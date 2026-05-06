@@ -26,6 +26,6 @@ public class Appointment {
     @JoinColumn(name = "doctor_id", nullable = false)
     private Doctor doctor;
 
-    @Column(name = "appointment_date")
+    @Column(name = "date")
     private LocalDateTime date;
 }
